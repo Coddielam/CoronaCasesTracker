@@ -16,7 +16,7 @@ function provinceName (province) {
 }
 
 document.querySelector("select").addEventListener("change", function(){
-    document.querySelector(".stats").innerHTML = '';
+    document.querySelector("table").innerHTML = '';
     provinceName(province);
     coronaCases(province);
 });
@@ -30,29 +30,30 @@ function coronaCases(province) {
         return response.json()
     })
     .then(function(data) {
-        console.log(data.locations[0]);
-        let massData = data;
-        // console.log(massData.locations[1].latest);
-        for (let i = 0; i<massData.locations.length; i++) {
-            let countyConfirmed = massData.locations[i].latest.confirmed;
-            let countyDeaths = massData.locations[i].latest.deaths;
-            let countyRecovered = massData.locations[i].latest.recovered;
 
-            let countyStatContainer = document.createElement("div");
-            countyStatContainer.setAttribute("class","county-stat-container");
+        var thead = document.createElement("thead");
+        thead.innerHTML = "<tr> <th>County</th><th>Confirmed Cases</th><th>Deaths</th><th>Recovered</th> </tr>"
+        document.querySelector("table").appendChild(thead);
 
-            let county = document.createElement('h2');
-            county.innerText = massData.locations[i].county;
+        let provinceData = data;
+        var countyData = document.createElement('tbody');
 
-            let countyStats = document.createElement('ul');
-            countyStats.innerHTML += "<li> Conformed Cases: " + countyConfirmed + "</li>";
-            countyStats.innerHTML += "<li> Deaths: " + countyDeaths + "</li>";
-            countyStats.innerHTML += "<li> Recovered Cases: " + countyRecovered + "</li>";
+        for (let i = 0; i<provinceData.locations.length; i++) {
+
+            let county = provinceData.locations[i].county;
+            let countyConfirmed = provinceData.locations[i].latest.confirmed;
+            let countyDeaths = provinceData.locations[i].latest.deaths;
+            let countyRecovered = provinceData.locations[i].latest.recovered;
+
+            let countyStats = document.createElement('tr');
+            countyStats.innerHTML += "<td>" + county + "</td>";
+            countyStats.innerHTML += "<td>" + countyConfirmed + "</td>";
+            countyStats.innerHTML += "<td>" + countyDeaths + "</td>";
+            countyStats.innerHTML += "<td>" + countyRecovered + "</td>";
             
-            countyStatContainer.appendChild(county);
-            countyStatContainer.appendChild(countyStats);
+            countyData.appendChild(countyStats);
             
-            document.querySelector(".stats").appendChild(countyStatContainer);
+            document.querySelector("table").appendChild(countyData);
         }
     })
     .catch(function() {
