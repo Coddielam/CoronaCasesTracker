@@ -1,12 +1,33 @@
-// data loads once window loads
-window.onload = function () {
-    coronaCases();
+function getProvince() {
+    province = document.querySelector("select").value;
+    return province;
 }
 
+// set h1 title
+function provinceName (province) {
+    province = getProvince();
+    document.querySelector("h1").innerText = province;
+}
+
+window.onload = function() {
+    let province = getProvince();
+    provinceName(province);
+    coronaCases(province);
+}
+
+// // data loads once window loads
+// window.onload = function () {
+document.querySelector("select").addEventListener("change", function(){
+    document.querySelector(".stats").innerHTML = '';
+    provinceName(province);
+    coronaCases(province);
+});
+// }
+
 // fetch data from corona virus tracker api
-function coronaCases() {
-    // var province = document.querySelector("option").innerText;
-    fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations?source=csbs&province=" + "Massachusetts")
+function coronaCases(province) {
+    province = getProvince();
+    fetch("https://coronavirus-tracker-api.herokuapp.com/v2/locations?source=csbs&province=" + province)
     .then(function(response) {
         return response.json()
     })
