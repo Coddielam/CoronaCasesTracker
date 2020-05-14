@@ -1,3 +1,9 @@
+window.onload = function() {
+    let province = getProvince();
+    provinceName(province);
+    coronaCases(province);
+}
+
 function getProvince() {
     province = document.querySelector("select").value;
     return province;
@@ -9,20 +15,12 @@ function provinceName (province) {
     document.querySelector("h1").innerText = province;
 }
 
-window.onload = function() {
-    let province = getProvince();
-    provinceName(province);
-    coronaCases(province);
-}
-
-// // data loads once window loads
-// window.onload = function () {
 document.querySelector("select").addEventListener("change", function(){
     document.querySelector(".stats").innerHTML = '';
     provinceName(province);
     coronaCases(province);
 });
-// }
+
 
 // fetch data from corona virus tracker api
 function coronaCases(province) {
