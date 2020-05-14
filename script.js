@@ -12,11 +12,11 @@ function getProvince() {
 // set h1 title
 function provinceName (province) {
     province = getProvince();
-    document.querySelector("h1").innerText = province;
+    document.querySelector("h1").innerHTML = '<img src="emoji/face-with-medical-mask.png" alt="Wear Mask Emoji">' + province;
 }
 
 document.querySelector("select").addEventListener("change", function(){
-    document.querySelector("table").innerHTML = '';
+    document.querySelector("tbody").remove();
     provinceName(province);
     coronaCases(province);
 });
@@ -31,12 +31,17 @@ function coronaCases(province) {
     })
     .then(function(data) {
 
+        document.querySelector("p#last-update").innerText += " " + data.locations[0].last_updated;
+
         var thead = document.createElement("thead");
-        thead.innerHTML = "<tr> <th>County</th><th>Confirmed Cases</th><th>Deaths</th><th>Recovered</th> </tr>"
-        document.querySelector("table").appendChild(thead);
+        // thead.innerHTML = "<tr> <th>County</th><th>Confirmed Cases</th><th>Deaths</th><th>Recovered</th> </tr>"
+        // document.querySelector("table").appendChild(thead);
 
         let provinceData = data;
-        var countyData = document.createElement('tbody');
+
+        console.log(data);
+
+        let countyData = document.createElement('tbody');
 
         for (let i = 0; i<provinceData.locations.length; i++) {
 
@@ -61,3 +66,21 @@ function coronaCases(province) {
     })
     setTimeout(coronaCases, 43200000) //update every 12 hours
 }
+
+function sortBy (colNum) {
+    var switching = true;
+
+    while (switching) {
+        switching = false;
+
+        for (var i = 0; i<document.querySelector("tbody").rows.length-1; i++) {
+            let rowOne = document.querySelector("tbody").rows[i];
+            let rowTwo = document.querySelector("tbody").rows[i+1];
+            if (Number(rowOne.children[colNum].innerHTML) < Number(rowTwo.children[colNum].innerText)) {
+                rowOne.parentNode.insertBefore(rowTwo, rowOne);
+                switching = true;
+            };
+        }
+    }
+}
+

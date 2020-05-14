@@ -3,11 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <title>Document</title>
+    <title>State & County Covid19 Cases</title>
 </head>
 <body>
-    <h1>State</h1>
+    <h1><img src="emoji/face-with-medical-mask.png" alt="Wear Mask Emoji"></h1>
 
     <select name="state" id="state">
         <!-- <option value="" selected="selected">Select a State</option> -->
@@ -32,7 +33,7 @@
         <option>Louisiana</option>
         <option>Maine</option>
         <option>Maryland</option>
-        <option>Massachusetts</option>
+        <option selected="selected">Massachusetts</option>
         <option>Michigan</option>
         <option>Minnesota</option>
         <option>Mississippi</option>
@@ -62,13 +63,25 @@
         <option>West Virginia</option>
         <option>Wisconsin</option>
         <option>Wyoming</option>
-      </select>
+    </select>
+
+    <p>U.S. County Data Provided by Conference of State Bank Supervisors (CSBS) <a href="https://www.csbs.org/information-covid-19-coronavirus">Link</a></p>
+    <p id="last-update">Last Update:</p>
 
     <div class="stats">
         <table>
-
+            <thead>
+                <tr>
+                    <th onclick = sortBy(0)>County</th>
+                    <th onclick = sortBy(1) class="numbers">Confirmed Cases &#9662</th>
+                    <th onclick = sortBy(2) class="numbers">Deaths &#9662</th>
+                    <th onclick = sortBy(3) class="numbers">Recovered &#9662</th>
+                </tr>
+            </thead>
         </table>
     </div>
     <script src="script.js"></script>
+
+    <p id="author"><i>Created by<a href="https://coddielam.github.io/EddieWebPortfolio/index.html">(Eddie) Chiu-Ming Lam</a> </i></p>
 </body>
 </html>

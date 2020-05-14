@@ -1,3 +1,13 @@
+*, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+img {
+    width: 33px;
+    height: auto;
+    margin-right: 12px;
+}
+
 h1 {
     text-align: center;
 }
@@ -6,17 +16,47 @@ select {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    font-size: 16px;
+}
+
+p {
+    text-align: center;
+}
+a, a:visited{
+    color: blue;
 }
 
 .stats {
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
 }
 
-.county-stat-container {
+table, th, td {
+    padding: 10px;
+    text-align: center;
     border-style: solid;
-    margin: 15px;
-    padding: 15px;
+    border-collapse: collapse;
+    border-width: 2px;
+}
+
+
+thead, th {
+    background-color: rgba(255, 16, 56, 0.952);
+    color: white;
+
+    border-color: black;
+}
+tbody>tr:nth-child(even) {
+    background-color: rgba(226, 226, 226, 0.938);
+}
+.numbers:hover {
+    cursor: pointer;
+}
+p#author {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: smaller;
+    margin-top: 0;
+    
 }
